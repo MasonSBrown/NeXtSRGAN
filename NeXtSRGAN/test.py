@@ -14,7 +14,7 @@ from modules.utils import (load_yaml, set_memory_growth, imresize_np,
 
 flags.DEFINE_string('cfg_path', './configs/nextsrgan.yaml', 'config file path')
 flags.DEFINE_string('gpu', '0', 'which gpu to use')
-flags.DEFINE_string('img_path', '', 'path to input image')
+flags.DEFINE_string('img_path', '', 'data/Undersampled(resize-blur)/20_29_norm.tiff')
 
 def main(_argv):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
