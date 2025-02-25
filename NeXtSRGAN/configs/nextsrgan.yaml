@@ -1,63 +1,46 @@
-# General settings
-general:
-    batch_size: 16
-    input_size: 32
-    gt_size: 128
-    ch_size: 3
-    scale: 4
-    sub_name: 'nextsrgan'
-    pretrain_name: 'psnr_pretrain'
-  
-  # Network settings
-  network:
-    generator:
-      nf: 64
-      nb: 23
-    discriminator:
-      nf: 64
-  
-  # Dataset settings
-  dataset:
-    train:
-      path: './data/KID_F_800_sub_bin.tfrecord'
-      num_samples: 5591
-      using_bin: true
-      using_flip: true
-      using_rot: true
-    test:
-      set5_path: './data/KID_F_TEST_DEGRAD'
-      set14_path: './data/KID_F_TEST'
-  
-  # Training settings
-  training:
-    niter: 80000
-    learning_rate:
-      generator:
-        initial: 1e-4
-        steps: [16000, 32000, 48000, 64000]
-        rate: 0.5
-      discriminator:
-        initial: 1e-4
-    adam_beta:
-      generator:
-        beta1: 0.9
-        beta2: 0.99
-      discriminator:
-        beta1: 0.9
-        beta2: 0.99
-  
-  # Loss settings
-  loss:
-    pixel:
-      weight: 1e-2
-      criterion: 'l1'
-    feature:
-      weight: 1.0
-      criterion: 'l1'
-    gan:
-      weight: 5e-3
-      type: 'ragan'  # options: gan | ragan
-  
-  # Saving settings
-  save:
-    steps: 5000
+input_size: 32
+gt_size: 128
+ch_size: 3
+scale: 4
+sub_name: 'nextsrgan'
+pretrain_name: 'psnr_pretrain'
+batch_size: 16
+
+network_G:
+  nf: 64
+  nb: 23
+
+network_D:
+  nf: 64
+
+train_dataset:
+  path: './data/KID_F_800_sub_bin.tfrecord'
+  num_samples: 5591
+  using_bin: true
+  using_flip: true
+  using_rot: true
+
+test_dataset:
+  set5_path: './data/KID_F_TEST_DEGRAD'
+  set14_path: './data/KID_F_TEST'
+
+lr_G: 1e-4
+lr_D: 1e-4
+lr_steps: [16000, 32000, 48048, 64000]
+lr_rate: 0.5
+
+adam_beta1_G: 0.9
+adam_beta2_G: 0.99
+adam_beta1_D: 0.9
+adam_beta2_D: 0.99
+
+w_pixel: 1e-2
+w_feature: 1.0
+w_gan: 5e-3
+
+niter: 80000
+save_steps: 5000
+
+pixel_criterion: 'l1'
+feature_criterion: 'l1'
+gan_type: 'ragan'
